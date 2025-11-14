@@ -34,7 +34,7 @@ const startServer = () => {
 
     const allowedOrigins = [
         "http://localhost:5173",                 // локальный фронтенд
-        "https://phera-development.vercel.app",  // Vercel продакшен
+        "https://phera-alpha.vercel.app",  // Vercel продакшен
     ];
 
     app.use(

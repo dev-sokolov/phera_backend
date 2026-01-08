@@ -8,14 +8,13 @@ const startServer = () => {
     const app = express();
 
     const allowedOrigins = [
-        "http://localhost:5173",                 // локальный фронтенд
-        "https://phera-development.vercel.app",  // Vercel продакшен
-    ];
+        "http://localhost:5173",
+        process.env.FRONTEND_URL 
+    ].filter(Boolean);  
 
     app.use(
         cors({
             origin: (origin, callback) => {
-                // Разрешаем запросы типа Postman (без origin)
                 if (!origin) return callback(null, true);
 
                 if (allowedOrigins.includes(origin)) {

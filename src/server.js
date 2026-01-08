@@ -9,8 +9,8 @@ const startServer = () => {
 
     const allowedOrigins = [
         "http://localhost:5173",
-        process.env.FRONTEND_URL 
-    ].filter(Boolean);  
+        process.env.FRONTEND_URL
+    ].filter(Boolean);
 
     app.use(
         cors({
@@ -27,6 +27,15 @@ const startServer = () => {
     );
 
     app.use(express.json());
+
+    // Healthcheck endpoint for monitoring
+    app.get("/api/health", (req, res) => {
+        res.status(200).json({
+            status: "ok",
+            timestamp: new Date().toISOString(),
+            uptime: process.uptime()
+        });
+    });
 
     app.use("/api/upload", imagesRouter);
 
